@@ -1,4 +1,4 @@
-package Coverage;
+package coverage;
 
 import spoon.reflect.declaration.CtField;
 import spoon.reflect.declaration.ModifierKind;
@@ -20,13 +20,14 @@ public class Coverage {
         return manager;
     }
 
-    public static CtField registerClass(CodeFactory codeFactory) {
+    public static CtField registerClass(CodeFactory codeFactory, String actualClass) {
         return codeFactory.createCtField(
                 SONDE_VAR_NAME,
                 codeFactory.createCtTypeReference(PROBE_INTERFACE_NAME),
-                String.format("new %s(%s.getProbeManager())",
+                String.format("new %s(%s.getProbeManager(), \"%s\")",
                         PROBE_CONCRETE_NAME,
-                        CLASS_NAME),
+                        CLASS_NAME,
+                        actualClass),
                 ModifierKind.STATIC
         );
     }

@@ -1,6 +1,6 @@
 package filters;
 
-import Coverage.Coverage;
+import coverage.Coverage;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.code.CtWhile;

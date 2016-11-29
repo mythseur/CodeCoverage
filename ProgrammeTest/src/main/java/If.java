@@ -1,4 +1,3 @@
-package programme;
 public class If {
     public java.lang.String run(int n) {
         if (n == 1)

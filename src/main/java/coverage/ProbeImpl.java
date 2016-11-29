@@ -1,4 +1,4 @@
-package Coverage;
+package coverage;
 
 import org.apache.log4j.Logger;
 
@@ -11,11 +11,11 @@ public class ProbeImpl implements Probe {
 
     private String currentMethod;
 
-    private Class probed;
+    private String probed;
 
     Logger logger = Logger.getLogger(ProbeImpl.class);
 
-    ProbeImpl(ProbeManager manager, Class probed) {
+    public ProbeImpl(ProbeManager manager, String probed) {
         this.probed = probed;
         manager.registerProbe(this);
         results = new HashMap<>();
@@ -28,17 +28,15 @@ public class ProbeImpl implements Probe {
     }
 
     @Override
-    public void probeLine(Integer number) throws CoverageException {
+    public void probeLine(Integer number)  {
         if (currentMethod != null) {
             results.get(currentMethod).put(number, results.get(currentMethod).get(number) + 1);
-        } else {
-            throw new CoverageException("Line probing when no method set");
         }
     }
 
     @Override
     public String getProbedClassName() {
-        return probed.getName();
+        return probed;
     }
 
     @Override

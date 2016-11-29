@@ -1,5 +1,3 @@
-package programme;
-
 public class Recursive {
     public static int decrement(int n){
         if(n > 0){

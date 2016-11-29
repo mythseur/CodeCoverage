@@ -1,6 +1,7 @@
 package filters;
 
-import Coverage.Coverage;
+
+import coverage.Coverage;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
@@ -26,7 +27,7 @@ public class ClassFilter implements Filter {
 
         CtClass ctClass = (CtClass) ctElement;
 
-        CtField newField = Coverage.registerClass(codeFactory);
+        CtField newField = Coverage.registerClass(codeFactory, ctClass.getQualifiedName());
 
         ctClass.addField(newField);
     }

@@ -1,11 +1,13 @@
 import org.apache.log4j.Logger;
-import spoon.Launcher;
-import spoon.SpoonAPI;
-import spoon.support.StandardEnvironment;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import processors.ClassProcessor;
+import spoon.Launcher;
+import spoon.SpoonAPI;
+import spoon.support.StandardEnvironment;
 
 public class CodeCoverage {
 
@@ -37,13 +39,15 @@ public class CodeCoverage {
         env.setComplianceLevel(8);
         env.useTabulations(true);
         SpoonAPI spoon = new Launcher();
-        spoon.addInputResource("/home/benji/IdeaProjects/CodeCoverage/TestProgramme/src/main/java/");
+        spoon.addProcessor(new ClassProcessor());
+        spoon.addInputResource("src/main/resources/programme");
+        spoon.run();
 
-        try {
-            runProcess("javac /home/benji/IdeaProjects/CodeCoverage/spooned/Main.java");
-            runProcess("java -classpath /home/benji/IdeaProjects/CodeCoverage/spooned/ Main");
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
+//        try {
+//            runProcess("javac /home/benji/IdeaProjects/CodeCoverage/spooned/Main.java");
+//            runProcess("java -classpath /home/benji/IdeaProjects/CodeCoverage/spooned/ Main");
+//        } catch (Exception e) {
+//            logger.error(e.getMessage(), e);
+//        }
     }
 }

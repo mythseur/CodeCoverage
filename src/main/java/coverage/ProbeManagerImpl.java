@@ -1,4 +1,4 @@
-package Coverage;
+package coverage;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package Coverage;
+package coverage;
 
 public interface ProbeManager {
 

@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import filters.ClassFilter;
+import filters.DoWhileFilter;
 import filters.DoNothingFilter;
 import filters.Filter;
+import filters.ForFilter;
 import filters.IfFilter;
 import filters.MethodFilter;
 import filters.WhileFilter;
@@ -17,10 +19,12 @@ import spoon.reflect.visitor.filter.TypeFilter;
 public class ClassProcessor extends AbstractProcessor<CtClass<?>> {
 
     private List<Filter> filters = Arrays.asList(
+            new ClassFilter(this),
             new MethodFilter(this),
             new IfFilter(this),
             new WhileFilter(this),
-            new ClassFilter(this)
+            new ForFilter(this),
+            new DoWhileFilter(this)
     );
 
     @Override

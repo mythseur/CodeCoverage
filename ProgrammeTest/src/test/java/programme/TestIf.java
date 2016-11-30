@@ -1,4 +1,7 @@
+package programme;
+
 import org.junit.Test;
+import programme.If;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,3 +1,5 @@
+package programme;
+
 import coverage.Coverage;
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;

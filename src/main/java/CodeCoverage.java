@@ -1,12 +1,11 @@
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import processors.ClassProcessor;
 import spoon.Launcher;
 import spoon.SpoonAPI;
 import spoon.support.StandardEnvironment;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class CodeCoverage {
 
@@ -39,9 +38,18 @@ public class CodeCoverage {
         env.useTabulations(true);
         SpoonAPI spoon = new Launcher();
         spoon.addProcessor(new ClassProcessor());
-        spoon.addInputResource("ProgrammeTest/src");
-        spoon.setSourceOutputDirectory("target/src/spoonded");
+        spoon.addInputResource("ProgrammeTest/src/main");
+        spoon.setSourceOutputDirectory("target/src/spooned");
         spoon.run();
+//        SpoonCompiler compiler = spoon.createCompiler();
+//        compiler.setBinaryOutputDirectory(new File("target/spooned"));
+//        compiler.compileInputSources();
+        try {
+            FileUtils.copyDirectory(new File("src/main/java/coverage"),new File("target/src/coverage"));
+            FileUtils.copyFile(new File("src/main/resources/log4j.xml"),new File("target/src/log4j.xml"));
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        }
 //        SpoonCompiler compiler = spoon.createCompiler();
 //        compiler.setBinaryOutputDirectory(new File("target/spooned"));
 //        compiler.compileInputSources();

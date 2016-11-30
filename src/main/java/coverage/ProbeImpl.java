@@ -23,14 +23,15 @@ public class ProbeImpl implements Probe {
 
     @Override
     public void probeMethod(String signature) {
-        results.put(signature, new HashMap<>());
+        results.computeIfAbsent(signature, k -> new HashMap<>());
         currentMethod = signature;
     }
 
     @Override
     public void probeLine(Integer number)  {
+        Integer current = results.get(currentMethod).get(number);
         if (currentMethod != null) {
-            results.get(currentMethod).put(number, results.get(currentMethod).get(number) + 1);
+            results.get(currentMethod).put(number, (current == null ? 0 : current) + 1);
         }
     }
 
@@ -41,6 +42,7 @@ public class ProbeImpl implements Probe {
 
     @Override
     public void logResults() {
+        logger.warn(probed);
         results.entrySet().forEach(
                 entry ->
                 {
@@ -48,8 +50,8 @@ public class ProbeImpl implements Probe {
                     entry.getValue().entrySet().forEach(
                             entryline -> logger.info(String.format(
                                     "Ligne %d passé %d fois",
-                                    entryline.getValue(),
-                                    entryline.getKey()
+                                    entryline.getKey(),
+                                    entryline.getValue()
                             )));
                 }
         );

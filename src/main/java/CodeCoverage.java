@@ -2,11 +2,9 @@ import org.apache.log4j.Logger;
 import processors.ClassProcessor;
 import spoon.Launcher;
 import spoon.SpoonAPI;
-import spoon.compiler.SpoonCompiler;
 import spoon.support.StandardEnvironment;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -44,9 +42,9 @@ public class CodeCoverage {
         spoon.addInputResource("ProgrammeTest/src");
         spoon.setSourceOutputDirectory("target/src/spoonded");
         spoon.run();
-        SpoonCompiler compiler = spoon.createCompiler();
-        compiler.setBinaryOutputDirectory(new File("target/spooned"));
-        compiler.compileInputSources();
+//        SpoonCompiler compiler = spoon.createCompiler();
+//        compiler.setBinaryOutputDirectory(new File("target/spooned"));
+//        compiler.compileInputSources();
 
 //        try {
 //            runProcess("javac /home/benji/IdeaProjects/CodeCoverage/spooned/Main.java");

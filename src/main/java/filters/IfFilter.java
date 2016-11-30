@@ -34,7 +34,9 @@ public class IfFilter implements Filter {
         ctIf.getThenStatement().insertBefore(statementThen);
 
 
-        if(ctIf.getElseStatement() != null){
+        if(ctIf.getElseStatement() != null && !(ctIf.getElseStatement() instanceof CtIf)){
+            //on ne traite pas else if comme un else
+
             CtStatement statementElse = codeFactory.createCodeSnippetStatement(
                     Coverage.registerLine(ctIf.getElseStatement().getPosition().getLine())
             );

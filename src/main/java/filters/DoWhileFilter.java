@@ -1,6 +1,6 @@
 package filters;
 
-import coverage.Coverage;
+import commonSpoon.CoverageSpoon;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtDo;
 import spoon.reflect.code.CtStatement;
@@ -28,7 +28,7 @@ public class DoWhileFilter implements Filter {
         CtDo ctDo = (CtDo) ctElement;
 
         CtStatement statementToInsert = codeFactory.createCodeSnippetStatement(
-                Coverage.registerLine(ctDo.getBody().getPosition().getLine())
+                CoverageSpoon.registerLine(ctDo.getBody().getPosition().getLine())
         );
 
         ctDo.getBody().insertBefore(statementToInsert);

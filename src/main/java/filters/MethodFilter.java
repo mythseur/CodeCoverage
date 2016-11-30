@@ -1,6 +1,6 @@
 package filters;
 
-import coverage.Coverage;
+import commonSpoon.CoverageSpoon;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.declaration.CtElement;
@@ -30,7 +30,7 @@ public class MethodFilter implements Filter {
         CodeFactory codeFactory = parentProcessor.getFactory().Code();
 
         CtStatement statementToInsert = codeFactory.createCodeSnippetStatement(
-                Coverage.registerMethod(ctElement.getShortRepresentation())
+                CoverageSpoon.registerMethod(ctElement.getShortRepresentation())
         );
 
         CtMethod ctMethod = (CtMethod) ctElement;

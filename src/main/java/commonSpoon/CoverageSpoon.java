@@ -1,10 +1,13 @@
-package coverage;
+package commonSpoon;
 
+import coverage.Coverage;
+import coverage.Probe;
+import coverage.ProbeImpl;
 import spoon.reflect.declaration.CtField;
 import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.factory.CodeFactory;
 
-public class Coverage {
+public class CoverageSpoon {
 
     private static String SONDE_VAR_NAME = "sonde";
 
@@ -13,12 +16,6 @@ public class Coverage {
     private static Class PROBE_INTERFACE_NAME = Probe.class;
 
     private static String CLASS_NAME = Coverage.class.getName();
-
-    private static ProbeManager manager = new ProbeManagerImpl();
-
-    public static ProbeManager getProbeManager() {
-        return manager;
-    }
 
     public static CtField registerClass(CodeFactory codeFactory, String actualClass) {
         return codeFactory.createCtField(
@@ -40,10 +37,5 @@ public class Coverage {
     public static String registerMethod(String signature)
     {
         return String.format("%s.probeMethod(\"%s\")", SONDE_VAR_NAME, signature);
-    }
-
-    static void showResults()
-    {
-        getProbeManager().showResults();
     }
 }

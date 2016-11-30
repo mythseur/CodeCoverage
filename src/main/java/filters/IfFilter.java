@@ -1,7 +1,7 @@
 package filters;
 
 
-import coverage.Coverage;
+import commonSpoon.CoverageSpoon;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtIf;
 import spoon.reflect.code.CtStatement;
@@ -29,7 +29,7 @@ public class IfFilter implements Filter {
         CtIf ctIf = (CtIf) ctElement;
 
         CtStatement statementThen = codeFactory.createCodeSnippetStatement(
-                Coverage.registerLine(ctIf.getThenStatement().getPosition().getLine())
+                CoverageSpoon.registerLine(ctIf.getThenStatement().getPosition().getLine())
         );
         ctIf.getThenStatement().insertBefore(statementThen);
 
@@ -38,7 +38,7 @@ public class IfFilter implements Filter {
             //on ne traite pas else if comme un else
 
             CtStatement statementElse = codeFactory.createCodeSnippetStatement(
-                    Coverage.registerLine(ctIf.getElseStatement().getPosition().getLine())
+                    CoverageSpoon.registerLine(ctIf.getElseStatement().getPosition().getLine())
             );
             ctIf.getElseStatement().insertBefore(statementElse);
         }

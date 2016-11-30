@@ -1,6 +1,6 @@
 package filters;
 
-import coverage.Coverage;
+import commonSpoon.CoverageSpoon;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.code.CtWhile;
@@ -28,7 +28,7 @@ public class WhileFilter implements Filter {
         CtWhile ctWhile = (CtWhile) ctElement;
 
         CtStatement statementWhile = codeFactory.createCodeSnippetStatement(
-                Coverage.registerLine(ctWhile.getPosition().getLine())
+                CoverageSpoon.registerLine(ctWhile.getPosition().getLine())
         );
 
         ctWhile.getBody().insertBefore(statementWhile);

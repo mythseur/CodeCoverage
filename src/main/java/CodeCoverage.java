@@ -39,26 +39,19 @@ public class CodeCoverage {
         SpoonAPI spoon = new Launcher();
         spoon.addProcessor(new ClassProcessor());
         spoon.addInputResource("ProgrammeTest/src/main");
-        spoon.setSourceOutputDirectory("target/src/spooned");
+        spoon.setSourceOutputDirectory("target/CodeCoverage/src/main/java");
         spoon.run();
-//        SpoonCompiler compiler = spoon.createCompiler();
-//        compiler.setBinaryOutputDirectory(new File("target/spooned"));
-//        compiler.compileInputSources();
         try {
-            FileUtils.copyDirectory(new File("src/main/java/coverage"),new File("target/src/coverage"));
-            FileUtils.copyFile(new File("src/main/resources/log4j.xml"),new File("target/src/log4j.xml"));
+            FileUtils.copyDirectory(new File("src/main/java/coverage"),
+                    new File("target/CodeCoverage/src/main/java/coverage"));
+            FileUtils.copyFile(new File("src/main/resources/log4j.xml"),
+                    new File("target/CodeCoverage/src/main/resources/log4j.xml"));
+            FileUtils.copyFile(new File("ProgrammeTest/pom.xml"),
+                   new File("target/CodeCoverage/pom.xml"));
+            FileUtils.copyDirectory(new File("ProgrammeTest/src/test"),
+                    new File("target/CodeCoverage/src/test"));
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
-//        SpoonCompiler compiler = spoon.createCompiler();
-//        compiler.setBinaryOutputDirectory(new File("target/spooned"));
-//        compiler.compileInputSources();
-
-//        try {
-//            runProcess("javac /home/benji/IdeaProjects/CodeCoverage/spooned/Main.java");
-//            runProcess("java -classpath /home/benji/IdeaProjects/CodeCoverage/spooned/ Main");
-//        } catch (Exception e) {
-//            logger.error(e.getMessage(), e);
-//        }
     }
 }

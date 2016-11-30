@@ -1,6 +1,6 @@
 package filters;
 
-import coverage.Coverage;
+import commonSpoon.CoverageSpoon;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtFor;
 import spoon.reflect.code.CtStatement;
@@ -28,7 +28,7 @@ public class ForFilter implements Filter {
         CtFor ctFor = (CtFor) ctElement;
 
         CtStatement statementToInsert = codeFactory.createCodeSnippetStatement(
-                Coverage.registerLine(ctFor.getBody().getPosition().getLine())
+                CoverageSpoon.registerLine(ctFor.getBody().getPosition().getLine())
         );
 
         ctFor.getBody().insertBefore(statementToInsert);

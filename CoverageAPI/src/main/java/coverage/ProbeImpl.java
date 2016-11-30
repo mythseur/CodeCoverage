@@ -1,7 +1,5 @@
 package coverage;
 
-import org.apache.log4j.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,8 +10,6 @@ public class ProbeImpl implements Probe {
     private String currentMethod;
 
     private String probed;
-
-    Logger logger = Logger.getLogger(ProbeImpl.class);
 
     public ProbeImpl(ProbeManager manager, String probed) {
         this.probed = probed;
@@ -42,13 +38,13 @@ public class ProbeImpl implements Probe {
 
     @Override
     public void logResults() {
-        logger.warn(probed);
+        System.out.println(probed);
         results.entrySet().forEach(
                 entry ->
                 {
-                    logger.warn(entry.getKey());
+                    System.out.println(entry.getKey());
                     entry.getValue().entrySet().forEach(
-                            entryline -> logger.info(String.format(
+                            entryline -> System.out.println(String.format(
                                     "Ligne %d passé %d fois",
                                     entryline.getKey(),
                                     entryline.getValue()

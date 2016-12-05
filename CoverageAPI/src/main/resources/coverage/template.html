@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coverage results</title></head>
+<body><h1>Coverage results</h1>
+<#list probes.entrySet() as probe>
+    <div><h2>Class : ${probe.key}</h2>
+        <#list ${probe.value}>
+            <ul>
+                <#items as line>
+                    <li>Ligne ${line.key} : ${line.value} passage(s)</li>
+                </#items>
+            </ul>
+        </#list>
+    </div>
+</#list>
+</body>
+</html>

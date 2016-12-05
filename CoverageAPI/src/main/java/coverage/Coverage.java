@@ -7,9 +7,4 @@ public class Coverage {
     public static ProbeManager getProbeManager() {
         return manager;
     }
-
-    static void showResults()
-    {
-        getProbeManager().showResults();
-    }
 }

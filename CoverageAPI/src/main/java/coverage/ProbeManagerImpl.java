@@ -1,7 +1,10 @@
 package coverage;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ProbeManagerImpl implements ProbeManager {
 
@@ -19,7 +22,11 @@ public class ProbeManagerImpl implements ProbeManager {
 
     @Override
     public void showResults() {
-        sondesList.forEach(Probe::logResults);
+        OutputWriter.writeResults(sondesList.stream().map(Probe::getResults).map(Map::entrySet).
+                flatMap(Collection::stream).collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                Map.Entry::getValue
+        )));
     }
 
 

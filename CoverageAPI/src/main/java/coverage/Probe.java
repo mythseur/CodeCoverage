@@ -1,5 +1,7 @@
 package coverage;
 
+import java.util.Map;
+
 public interface Probe {
 
     void probeMethod(String signature);
@@ -9,4 +11,6 @@ public interface Probe {
     String getProbedClassName();
 
     void logResults();
+
+    Map<String, Map<Integer, Integer>> getResults();
 }

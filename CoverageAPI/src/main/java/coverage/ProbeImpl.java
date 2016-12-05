@@ -1,7 +1,10 @@
 package coverage;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ProbeImpl implements Probe {
 
@@ -51,5 +54,15 @@ public class ProbeImpl implements Probe {
                             )));
                 }
         );
+    }
+
+    public Map<String, Map<Integer, Integer>> getResults()
+    {
+        return Collections.singletonMap(probed, results.entrySet().stream()
+        .map(Map.Entry::getValue).map(Map::entrySet).flatMap(Collection::stream)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                )));
     }
 }

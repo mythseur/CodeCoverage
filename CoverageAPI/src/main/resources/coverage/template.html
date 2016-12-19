@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <title>Coverage results</title></head>
 <body><h1>Coverage results</h1>
-<#list probes.entrySet() as probe>
-    <div><h2>Class : ${probe.key}</h2>
-        <#list probe.value>
+<#list probes as probekey, probevalue>
+    <div><h2>Class : ${probekey}</h2>
+        <#list probevalue as key, value>
             <ul>
-                <#items as line>
-                    <li>Ligne ${line.key} : ${line.value} passage(s)</li>
-                </#items>
+                <li>Ligne ${key} : ${value} passage(s)</li>
             </ul>
         </#list>
     </div>

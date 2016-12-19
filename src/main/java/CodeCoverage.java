@@ -21,47 +21,35 @@ public class CodeCoverage {
 
     private static String artifactName;
 
-    private static void printLines(String name, InputStream ins) throws Exception {
-        Logger logger = Logger.getLogger(CodeCoverage.class.getName());
-        String line;
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(ins));
-        while ((line = in.readLine()) != null) {
-            logger.info(name + " " + line);
-        }
-    }
+    public static void main(String[] args) throws IOException, XmlPullParserException {
+        String programmePath = args[0];
 
-    private static void runProcess(String command) throws Exception {
-        Logger logger = Logger.getLogger(CodeCoverage.class.getName());
-        Process pro = Runtime.getRuntime().exec(command);
-        printLines(" stdout:", pro.getInputStream());
-        printLines(" stderr:", pro.getErrorStream());
-        pro.waitFor();
-        logger.info(" exitValue() " + pro.exitValue());
-    }
-
-    public static void main(String[] args) {
         Logger logger = Logger.getLogger(CodeCoverage.class);
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        Model model = reader.read(new FileReader(programmePath+"/pom.xml"));
+        artifactName = model.getArtifactId();
+
         StandardEnvironment env = new StandardEnvironment();
         env.setAutoImports(true);
         env.setComplianceLevel(8);
         env.useTabulations(true);
         SpoonAPI spoon = new Launcher();
         spoon.addProcessor(new ClassProcessor());
-        spoon.addInputResource("ProgrammeTest/src/main");
-        spoon.setSourceOutputDirectory("target/CodeCoverage/ProgrammeTest/src/main/java");
+
+        spoon.addInputResource(programmePath+"/src/main");
+        spoon.setSourceOutputDirectory("target/CodeCoverage/"+artifactName+"/src/main/java");
         spoon.run();
         try {
             FileUtils.copyDirectory(new File("CoverageAPI/src/main"),
                     new File("target/CodeCoverage/CoverageAPI/src/main"));
             FileUtils.copyFile(new File("CoverageAPI/pom.xml"),
                     new File("target/CodeCoverage/CoverageAPI/pom.xml"));
-            FileUtils.copyFile(new File("ProgrammeTest/pom.xml"),
-                    new File("target/CodeCoverage/ProgrammeTest/pom.xml"));
-            FileUtils.copyDirectory(new File("ProgrammeTest/src/test"),
-                    new File("target/CodeCoverage/ProgrammeTest/src/test"));
+            FileUtils.copyFile(new File(programmePath+"/pom.xml"),
+                    new File("target/CodeCoverage/"+artifactName+"/pom.xml"));
+            FileUtils.copyDirectory(new File(programmePath+"/src/test"),
+                    new File("target/CodeCoverage/"+artifactName+"/src/test"));
             FileUtils.copyFile(new File("CoverageAPI/src/test/java/RunTestCoverage.java"),
-                    new File("target/CodeCoverage/ProgrammeTest/src/test/java/RunTestCoverage.java"));
+                    new File("target/CodeCoverage/"+artifactName+"/src/test/java/RunTestCoverage.java"));
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
@@ -101,10 +89,7 @@ public class CodeCoverage {
         MavenXpp3Writer writer = new MavenXpp3Writer();
 
         try {
-            Model model = reader.read(new FileReader("target/CodeCoverage/ProgrammeTest/pom.xml"));
-
-            artifactName = model.getArtifactId();
-
+            Model model = reader.read(new FileReader("target/CodeCoverage/"+artifactName+"/pom.xml"));
             Dependency dependency = new Dependency();
             dependency.setArtifactId("CoverageAPI");
             dependency.setGroupId("fr.istic.master2.vv");
@@ -137,10 +122,8 @@ public class CodeCoverage {
 
             model.setBuild(build);
 
-            writer.write(new FileOutputStream("target/CodeCoverage/ProgrammeTest/pom.xml"),
+            writer.write(new FileOutputStream("target/CodeCoverage/"+artifactName+"/pom.xml"),
                     model);
-
-
         } catch (IOException | XmlPullParserException e) {
             logger.error(e.getMessage(), e);
         }

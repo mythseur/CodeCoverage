@@ -28,8 +28,8 @@ public class ProbeImpl implements Probe {
 
     @Override
     public void probeLine(Integer number)  {
-        Integer current = results.get(currentMethod).get(number);
         if (currentMethod != null) {
+            Integer current = results.get(currentMethod).get(number);
             results.get(currentMethod).put(number, (current == null ? 0 : current) + 1);
         }
     }

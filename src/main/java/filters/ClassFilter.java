@@ -27,7 +27,13 @@ public class ClassFilter implements Filter {
 
         CtClass ctClass = (CtClass) ctElement;
 
-        CtField newField = CoverageSpoon.registerClass(codeFactory, ctClass.getQualifiedName());
+        String name = ctClass.getQualifiedName();
+
+        if(name.contains("$"))
+        {
+            return;
+        }
+        CtField newField = CoverageSpoon.registerClass(codeFactory,name );
 
         ctClass.addField(newField);
     }

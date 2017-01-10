@@ -96,6 +96,25 @@ public class CodeCoverage {
             dependency.setVersion("1.0-SNAPSHOT");
             model.addDependency(dependency);
 
+            String source = model.getProperties().getProperty("maven.compiler.source");
+            if(source == null)
+            {
+                model.addProperty("maven.compiler.source","1.8");
+            }
+            else
+            {
+                model.getProperties().setProperty("maven.compiler.source", "1.8");
+            }
+            String target = model.getProperties().getProperty("maven.compiler.target");
+            if(target == null)
+            {
+                model.addProperty("maven.compiler.target","1.8");
+            }
+            else
+            {
+                model.getProperties().setProperty("maven.compiler.target", "1.8");
+            }
+
             Xpp3Dom value = new Xpp3Dom("value");
             value.setValue("RunTestCoverage");
             Xpp3Dom name = new Xpp3Dom("name");

@@ -27,7 +27,10 @@ public class ProbeManagerImpl implements ProbeManager {
                           .map(Probe::getResults)
                           .map(Map::entrySet)
                           .flatMap(Collection::stream)
-                          .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+                          .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (integerIntegerMap, integerIntegerMap2) -> {
+                              integerIntegerMap.putAll(integerIntegerMap2);
+                              return integerIntegerMap;
+                          })));
     }
 
 

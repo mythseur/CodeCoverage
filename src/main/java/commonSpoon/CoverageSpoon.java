@@ -18,7 +18,7 @@ public class CoverageSpoon {
     private static String CLASS_NAME = Coverage.class.getName();
 
     public static CtField registerClass(CodeFactory codeFactory, String actualClass) {
-        return codeFactory.createCtField(
+        return  codeFactory.createCtField(
                 SONDE_VAR_NAME,
                 codeFactory.createCtTypeReference(PROBE_INTERFACE_NAME),
                 String.format("new %s(%s.getProbeManager(), \"%s\")",

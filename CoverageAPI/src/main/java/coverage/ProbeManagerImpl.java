@@ -22,11 +22,12 @@ public class ProbeManagerImpl implements ProbeManager {
 
     @Override
     public void showResults() {
-        OutputWriter.writeResults(sondesList.stream().map(Probe::getResults).map(Map::entrySet).
-                flatMap(Collection::stream).collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                Map.Entry::getValue
-        )));
+        OutputWriter.writeResults(
+                sondesList.stream()
+                          .map(Probe::getResults)
+                          .map(Map::entrySet)
+                          .flatMap(Collection::stream)
+                          .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
     }
 
 

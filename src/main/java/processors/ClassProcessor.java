@@ -17,7 +17,9 @@ public class ClassProcessor extends AbstractProcessor<CtClass<?>> {
             new IfFilter(this),
             new WhileFilter(this),
             new ForFilter(this),
-            new DoWhileFilter(this)
+            new ForEachFilter(this),
+            new DoWhileFilter(this),
+            new MoreStatementFilter(this)
     );
 
     @Override

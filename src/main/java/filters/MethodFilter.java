@@ -29,13 +29,17 @@ public class MethodFilter implements Filter {
 
         CodeFactory codeFactory = parentProcessor.getFactory().Code();
 
-        CtStatement statementToInsert = codeFactory.createCodeSnippetStatement(
+        CtStatement statementMethod = codeFactory.createCodeSnippetStatement(
                 CoverageSpoon.registerMethod(ctElement.getShortRepresentation())
+        );
+        CtStatement statementLine = codeFactory.createCodeSnippetStatement(
+                CoverageSpoon.registerLine(ctElement.getPosition().getLine())
         );
 
         CtMethod ctMethod = (CtMethod) ctElement;
 
-        ctMethod.getBody().insertBegin(statementToInsert);
+        ctMethod.getBody().insertBegin(statementLine);
+        ctMethod.getBody().insertBegin(statementMethod);
 
     }
 }

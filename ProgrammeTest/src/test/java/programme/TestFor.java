@@ -18,6 +18,7 @@ public class TestFor {
         assertEquals(expected, f.buildList());
         expected.sort((o1, o2) -> o2 - o1);
         assertEquals(expected, f.buildReverseList());
+        assertEquals(10, ForEach.sum(f.buildList()));
     }
 
 

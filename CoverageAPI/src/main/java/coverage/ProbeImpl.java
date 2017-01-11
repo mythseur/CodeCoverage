@@ -61,6 +61,6 @@ public class ProbeImpl implements Probe {
                        .map(Map.Entry::getValue)
                        .map(Map::entrySet)
                        .flatMap(Collection::stream)
-                       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+                       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (integer, integer2) -> integer + integer2)));
     }
 }

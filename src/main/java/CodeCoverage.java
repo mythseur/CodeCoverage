@@ -48,6 +48,8 @@ public class CodeCoverage {
                     new File("target/CodeCoverage/"+artifactName+"/pom.xml"));
             FileUtils.copyDirectory(new File(programmePath+"/src/test"),
                     new File("target/CodeCoverage/"+artifactName+"/src/test"));
+            FileUtils.copyDirectory(new File(programmePath+"/src/main/resources"),
+                    new File("target/CodeCoverage/"+artifactName+"/src/main/resources"));
             FileUtils.copyFile(new File("CoverageAPI/src/test/java/RunTestCoverage.java"),
                     new File("target/CodeCoverage/"+artifactName+"/src/test/java/RunTestCoverage.java"));
         } catch (IOException e) {
